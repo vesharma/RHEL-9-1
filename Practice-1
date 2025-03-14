@@ -1,5 +1,9 @@
 https://www.redhat.com/en/blog/rhel-9-networking-say-goodbye-ifcfg-files-and-hello-keyfiles
 https://medium.com/@murat.bilal/configuring-network-interfaces-on-rhel9-d2531a3083dd
+
+ ll /sys/class/cpuid/ |grep 'cpu'| awk -F ' ' '{print $(NF -$(NF-1))}'|awk -F '/' '{print $(NF)}'
+
+
 hostnamectl set-hostname --static software.local
 NetworkManager --print-config
 
