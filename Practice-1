@@ -1,5 +1,5 @@
 https://www.redhat.com/en/blog/rhel-9-networking-say-goodbye-ifcfg-files-and-hello-keyfiles
-
+https://medium.com/@murat.bilal/configuring-network-interfaces-on-rhel9-d2531a3083dd
 hostnamectl set-hostname --static software.local
 NetworkManager --print-config
 
@@ -8,7 +8,8 @@ DEVICE  TYPE      STATE                   CONNECTION
 ens160  ethernet  connected               ens160
 ens224  ethernet  connected               Wired connection 1
 lo      loopback  connected (externally)  lo
-
+ 
+#ls /sys/class/net/
 
 [root@localhost ~]# nmcli device show |grep -i Device
 GENERAL.DEVICE:                         ens160
