@@ -1,0 +1,59 @@
+https://www.redhat.com/en/blog/rhel-9-networking-say-goodbye-ifcfg-files-and-hello-keyfiles
+
+hostnamectl set-hostname --static software.local
+NetworkManager --print-config
+
+[root@localhost ~]# nmcli device
+DEVICE  TYPE      STATE                   CONNECTION
+ens160  ethernet  connected               ens160
+ens224  ethernet  connected               Wired connection 1
+lo      loopback  connected (externally)  lo
+
+
+[root@localhost ~]# nmcli device show |grep -i Device
+GENERAL.DEVICE:                         ens160
+GENERAL.DEVICE:                         ens224
+GENERAL.DEVICE:                         lo
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# nmcli connection show
+NAME                UUID                                  TYPE      DEVICE
+ens160              638ff203-8a4f-3ee9-9013-038f022b2c47  ethernet  ens160
+Wired connection 1  8e95d9fb-847c-3ede-9b83-a2eeb6aefed7  ethernet  ens224
+lo                  01c5c361-e581-4f4a-9ad2-d2d2b6328d84  loopback  lo
+ens161-data         8cd0113f-be7b-4c1a-a67c-672bd42616b7  ethernet  --
+
+#ip addr show ens160
+
+
+nmcli con add 'ens161-add' ifname ens161-add ipv4.method manual ipv4.addresses 192.168.88.143/24 gw4 192.168.88.2 ipv4.dns 192.168.88.2
+nmcli con down 'ens161-add'
+nmcli con up 'ens161-add'
+ip addr show ens161-add
+ip route show
+ip add show
+nmcli con reload
+ nmcli con reload ens161-add
+ nmcli con mod ens161-add ipv4.dns "8.8.8.8 8.8.4.4"
+ nmcli con show ens161-add |grep dns
+  nmcli con show ens161-add |grep dns-search
+  nmcli device status
+  nmcli con del ens161-add
+  
+  
+  ---
+  
+  nmcli con add type bond con-name bond0 ifname bond0 mode active-backup ip4 192.168.1.10/24
+nmcli con add type bond-slave ifname ens3 master bond0
+nmcli con add type bond-slave ifname ens4 master bond0
+If necessary you can bring up the interfaces by running:
+nmcli con up bond-slave-ens3
+nmcli con up bond-slave-ens4
+nmcli con up bond0
+
+
+ nmcli connection
+ cat /etc/NetworkManager/system-connections/
+  cat /etc/NetworkManager/system-connections/bond-slave-ens3.nmconnection
+ 
+ 
