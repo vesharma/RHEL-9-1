@@ -7,6 +7,14 @@ https://medium.com/@murat.bilal/configuring-network-interfaces-on-rhel9-d2531a30
  nmcli connection show
 systemctl restart NetworkManager.service
 
+
+[root@software system-connections]# nmcli connection show
+NAME                UUID                                  TYPE      DEVICE
+ens160              638ff203-8a4f-3ee9-9013-038f022b2c47  ethernet  ens160
+Wired connection 1  8e95d9fb-847c-3ede-9b83-a2eeb6aefed7  ethernet  ens224  <<--------
+lo                  01c5c361-e581-4f4a-9ad2-d2d2b6328d84  loopback  lo
+
+nmcli connection modify "Wired connection 1" connection.id ens224
 hostnamectl set-hostname --static software.local
 NetworkManager --print-config
 
