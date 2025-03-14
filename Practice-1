@@ -26,7 +26,7 @@ ens161-data         8cd0113f-be7b-4c1a-a67c-672bd42616b7  ethernet  --
 #ip addr show ens160
 
 
-nmcli con add 'ens161-add' ifname ens161-add ipv4.method manual ipv4.addresses 192.168.88.143/24 gw4 192.168.88.2 ipv4.dns 192.168.88.2
+nmcli connection add  con-name 'ens161-add' ifname ens161-add type ethernet ipv4.method manual ipv4.addresses 192.168.88.143/24 gw4 192.168.88.2 ipv4.dns 192.168.88.2
 nmcli con down 'ens161-add'
 nmcli con up 'ens161-add'
 ip addr show ens161-add
