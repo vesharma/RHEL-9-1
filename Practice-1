@@ -14,6 +14,7 @@ ens224  ethernet  connected               Wired connection 1
 lo      loopback  connected (externally)  lo
  
 #ls /sys/class/net/
+/sys/class/scsi_device/
 
 [root@localhost ~]# nmcli device show |grep -i Device
 GENERAL.DEVICE:                         ens160
@@ -44,7 +45,7 @@ nmcli con reload
   nmcli con show ens161-add |grep dns-search
   nmcli device status
   nmcli con del ens161-add
-  
+  /sys/class/scsi_device/
   
   ---
   
